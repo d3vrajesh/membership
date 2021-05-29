@@ -25,6 +25,7 @@ function jal_install() {
     $sql = "CREATE TABLE $nnhs_table_name (
 		s_no mediumint(9) NOT NULL AUTO_INCREMENT,
 		m_no text(30) default,
+        membership_type text(30) default,
         app_status varchar(20) default,
         applicant_name varchar(25) NOT NULL,   
 		dob date default,

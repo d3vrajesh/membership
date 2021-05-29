@@ -32,6 +32,7 @@ th {
                     <!----Table Heading---->
                     <th>S.No</th>
                     <th>Membership ID</th>
+                    <th>Membership Type</th>
                     <th>App Status</th>
                     <th>Edit</th>
                     <th>Delete</th>
@@ -47,7 +48,7 @@ th {
                     <th>Place of Institute</th>
                     <th>Designation</th>
                     <th>Interest</th>
-                    <th>Referrece Name</th>
+                    <th>Reference Name</th>
                     <th>Reference Contact</th>
                     <th>ID proof type</th>
                     <th>Id proof no</th>
@@ -65,7 +66,7 @@ th {
                 // Displaying the membership data in a table
             global $wpdb;
             $nnhs_table_name = $wpdb->prefix . 'members_list';
-            $membership = $wpdb->get_results("SELECT m_no, app_status, applicant_name, dob, contact_address, tel_res, tel_off, 
+            $membership = $wpdb->get_results("SELECT s_no, m_no, membership_type, app_status, applicant_name, dob, contact_address, tel_res, tel_off, 
             mob, email, profession, name_ins, place_ins, designation, interest, ref_name, ref_detail, id_proof_type, 
             id_proof_no, amount, pay_status, transaction_type, transaction_id, upload, place, app_date from $nnhs_table_name ORDER BY id DESC");
             foreach ($membership as $member) {
@@ -73,6 +74,7 @@ th {
                 <tr>
                     <td><?= $member->s_no; ?></td>
                     <td><?= $member->m_no; ?></td>
+                    <td><?= $member->membership_type; ?></td>
                     <td><?= $member->app_status; ?></td>
                     <td><a
                             href="<?php echo admin_url('admin.php?page=Member_Update&s_no=' . $member->s_no); ?>">Update</a>
