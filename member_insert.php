@@ -15,7 +15,7 @@ function member_insert()
         <form name="frm" action="#" method="post">
             <!--            <tr>
                 <td>S.No </td>
-                <td input type="text" name="s_no"> </td>>
+                <td input type="hidden" name="s_no"> </td>>
             <tr>
 -->
             <tr>
@@ -26,7 +26,7 @@ function member_insert()
                 <td>Membership Type </td>
                 <td><select name="mem_type">
                         <option value="Individual">Individual</option>
-                        <option value="Institue">Institute</option>
+                        <option value="Institute">Institute</option>
                     </select>
                 </td>
             <tr>
@@ -97,9 +97,9 @@ function member_insert()
             <tr>
                 <td>ID proof ype </td>
                 <td><select name="mem_id_type">
-                        <option value="aadhar">Aadhar Card</option>
-                        <option value="license">Driving License</option>
-                        <option value="license">Voters ID</option>
+                        <option value="Aadhar Card">Aadhar Card</option>
+                        <option value="Driving License">Driving License</option>
+                        <option value="Voters ID">Voters ID</option>
                     </select>
                 </td>
             <tr>
@@ -117,15 +117,15 @@ function member_insert()
             <tr>
                 <td>Payment Status </td>
                 <td><select name="mem_payment_status">
-                        <option value="completed">Completed</option>
-                        <option value="pending">Pending</option>
+                        <option value="Done">Done</option>
+                        <option value="Pending">Pending</option>
                     </select></td>
             <tr>
             <tr>
                 <td>Payment Type </td>
-                <td><select name="mem_payment_type">
-                        <option value="google_pay">Google Pay</option>
-                        <option value="bank">Bank</option>
+                <td><select name="payment_mode">
+                        <option value="Google Pay">Google Pay</option>
+                        <option value="Bank Transfer">Bank</option>
                     </select></td>
             <tr>
             <tr>
@@ -156,20 +156,65 @@ function member_insert()
 // Inserting the form data in the databse table  
     if(isset($_POST['ins'])){
         global $wpdb;
-        $nm=$_POST['nm'];
-        $ad=$_POST['adrs'];
-        $d=$_POST['des'];
-        $m=$_POST['mob'];
+//      $s_no=$_POST['s_no'];
+        $m_id=$_POST['mem_id'];
+        $membership_type=$_POST['mem_type'];
+        $app_status=$_POST['mem_status'];
+        $applicant_name=$_POST['mem_name'];
+        $dob=$_POST['mem_dob'];
+        $contct_address=$_POST['mem_address'];
+        $tel_res=$_POST['mem_tel_res'];
+        $tel_off=$_POST['mem_tel_off'];
+        $mob=$_POST['mem_mobile'];
+        $email=$_POST['mem_email'];
+        $profession=$_POST['mem_profession'];
+        $name_ins=$_POST['mem_name_ins'];
+        $place_ins=$_POST['mem_place_ins'];
+        $designation=$_POST['mem_designation'];
+        $interest=$_POST['mem_interest'];
+        $ref_name=$_POST['mem_ref_name'];
+        $ref_detail=$_POST['mem_ref_detail'];
+        $id_proof_type=$_POST['mem_id_type'];
+        $id_proof_no=$_POST['mem_id_no'];
+        $amount=$_POST['mem_amount'];
+        $pay_status=$_POST['mem_payment_status'];
+        $transaction_type=$_POST['payment_mode'];
+        $transaction_id=$_POST['mem_transaction_id'];
+        $upload=$_POST['mem_photo'];
+        $place=$_POST['mem_place'];
+        $app_date=$_POST['mem_date'];
+        
         $nnhs_table_name = $wpdb->prefix . 'members_list';
 
         $wpdb->insert(
             $nnhs_table_name,
             array(
-                'name' => $nm,
-                'address' => $ad,
-                'role' => $d,
-                'contact'=>$m
-            )
+                'm_id' => $m_id,
+                'membership_type' => $membership_type,
+                'app_status' => $app_status,
+                'applicant_name' => $applicant_name,
+                'dob' => $dob,
+                'contact_address' => $contct_address,
+                'tel_res' => $tel_res,
+                'tel_off' => $tel_off,
+                'mob' => $mob,
+                'email' => $email,
+                'profession' => $profession,
+                'name_ins' => $name_ins,
+                'place_ins' => $place_ins,
+                'designation' => $designation,
+                'interest' => $interest,
+                'ref_name' => $ref_name,
+                'ref_detail' => $ref_detail,
+                'id_proof_type' => $id_proof_type,
+                'id_proof_no' => $id_proof_no,
+                'amount' => $amount,
+                'pay_status' => $pay_status,
+                'transaction_type' => $transaction_type,
+                'transaction_id' => $transaction_id,
+                'upload' => $upload,
+                'place' => $place,
+                'app_date' => $app_date            )
         );
         echo "inserted";
          ?>
