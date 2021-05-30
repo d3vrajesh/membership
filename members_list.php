@@ -66,14 +66,14 @@ th {
                 // Displaying the membership data in a table
             global $wpdb;
             $nnhs_table_name = $wpdb->prefix . 'members_list';
-            $membership = $wpdb->get_results("SELECT s_no, m_no, membership_type, app_status, applicant_name, dob, contact_address, tel_res, tel_off, 
+            $membership = $wpdb->get_results("SELECT s_no, m_id, membership_type, app_status, applicant_name, dob, contact_address, tel_res, tel_off, 
             mob, email, profession, name_ins, place_ins, designation, interest, ref_name, ref_detail, id_proof_type, 
-            id_proof_no, amount, pay_status, transaction_type, transaction_id, upload, place, app_date from $nnhs_table_name ORDER BY id DESC");
+            id_proof_no, amount, pay_status, transaction_type, transaction_id, upload, place, app_date from $nnhs_table_name ORDER BY s_no DESC");
             foreach ($membership as $member) {
                 ?>
                 <tr>
                     <td><?= $member->s_no; ?></td>
-                    <td><?= $member->m_no; ?></td>
+                    <td><?= $member->m_id; ?></td>
                     <td><?= $member->membership_type; ?></td>
                     <td><?= $member->app_status; ?></td>
                     <td><a

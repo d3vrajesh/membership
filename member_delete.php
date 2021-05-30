@@ -8,7 +8,7 @@ function member_delete(){
         $i=$_GET['s_no'];
         $wpdb->delete(
             $nnhs_table_name,
-            array('id'=>$i)
+            array('s_no'=>$i)
         );
         echo "deleted";
     }
