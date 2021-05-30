@@ -33,14 +33,14 @@ function member_insert()
             <tr>
                 <td>Application Status </td>
                 <td><select name="mem_status">
-                        <option value="Approved">Developer</option>
-                        <option value="Pending">Designer</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Pending">Pending</option>
                     </select>
                 </td>
             <tr>
             <tr>
                 <td>Name </td>
-                <td> <input type="date" name="mem_name"> </td>
+                <td> <input type="text" name="mem_name"> </td>
             <tr>
             <tr>
                 <td>Date of Birth </td>
@@ -142,7 +142,7 @@ function member_insert()
             <tr>
             <tr>
                 <td>Date </td>
-                <td> <input type="text" name="mem_date"> </td>
+                <td> <input type="date" name="mem_date"> </td>
             <tr>
             <tr>
                 <td></td>
@@ -162,7 +162,7 @@ function member_insert()
         $app_status=$_POST['mem_status'];
         $applicant_name=$_POST['mem_name'];
         $dob=$_POST['mem_dob'];
-        $contct_address=$_POST['mem_address'];
+        $contact_address=$_POST['mem_address'];
         $tel_res=$_POST['mem_tel_res'];
         $tel_off=$_POST['mem_tel_off'];
         $mob=$_POST['mem_mobile'];
@@ -194,7 +194,7 @@ function member_insert()
                 'app_status' => $app_status,
                 'applicant_name' => $applicant_name,
                 'dob' => $dob,
-                'contact_address' => $contct_address,
+                'contact_address' => $contact_address,
                 'tel_res' => $tel_res,
                 'tel_off' => $tel_off,
                 'mob' => $mob,

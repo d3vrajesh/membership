@@ -10,45 +10,45 @@
 
 //creating database table
 
-global $jal_db_version;
-$jal_db_version = '1.0';
+//global $jal_db_version;
+//$jal_db_version = '1.0';
 
 function jal_install() {
     global $wpdb;
-    global $jal_db_version;
-
+//    global $jal_db_version;
+ //   require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
     $nnhs_table_name = $wpdb->prefix . 'members_list'; 
     $charset_collate = $wpdb->get_charset_collate();
 
     $sql = "CREATE TABLE $nnhs_table_name (
-		s_no mediumint(9) NOT NULL AUTO_INCREMENT,
-		m_id text(30) default,
-        membership_type text(30) default,
-        app_status varchar(20) default,
-        applicant_name varchar(25) NOT NULL,   
-		dob date default,
-        contct_address text(100) NOT NULL,
-        tel_res varchar(15) NOT NULL,
-        tel_off varchar(15) NOT NULL,
-        mob varchar(10) NOT NULL,
-        email varchar(50) NOT NULL,
-        profession varchar(40) NOT NULL,
-        name_ins varchar(50) NOT NULL,
-        place_ins varchar(50) NOT NULL,
-        designation varchar(40) NOT NULL,
-        interest varchar(220) NOT NULL,
-        ref_name varchar(30) NOT NULL,
-        ref_detail varchar(50) NOT NULL,
-        id_proof_type text NOT NULL,
-        id_proof_no text NOT NULL,
-        amount text NOT NULL,
-        pay_status text NOT NULL,
-        transaction_type text NOT NULL,
-        transaction_id text NOT NULL,
-        upload text NOT NULL,
-        place text NOT NULL,
-        app_date date 
-		PRIMARY KEY  (s_no)
+		s_no int(10) NOT NULL AUTO_INCREMENT,
+		m_id text(30),
+        membership_type text(30),
+        app_status varchar(20),
+        applicant_name varchar(25),   
+		dob date,
+        contact_address text(100),
+        tel_res varchar(15),
+        tel_off varchar(15),
+        mob varchar(10),
+        email varchar(50),
+        profession varchar(40),
+        name_ins varchar(50),
+        place_ins varchar(50),
+        designation varchar(40),
+        interest varchar(220),
+        ref_name varchar(30),
+        ref_detail varchar(50),
+        id_proof_type text(40),
+        id_proof_no text(40),
+        amount text(20),
+        pay_status text(30),
+        transaction_type text(50),
+        transaction_id text(50),
+        upload text(200),
+        place text(30),
+        app_date date,
+		PRIMARY KEY (s_no)  
 	) $charset_collate;";
 
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
