@@ -11,24 +11,21 @@ function member_update(){
     $current_member = $member[0]->s_no;
     echo "<h3> S.No: $current_member</h3>";
     ?>
- 
+
 <!---- Form to edit the Row in the databse----->
 <table>
     <thead>
         <tr>
             <th>Update the member details</th>
-             
-            
+
+
         </tr>
-        
+
     </thead>
     <br>
     <tbody>
         <form name="frm" action="#" method="post">
-         
-                
-                <input type="hidden" name="s_no" value="<?= $member[0]->s_no; ?>">  
-         
+            <input type="hidden" name="s_no" value="<?= $member[0]->s_no; ?>">
             <tr>
                 <td>Membership ID </td>
                 <td> <input type="text" name="mem_id" value="<?= $member[0]->m_id; ?>"> </td>
@@ -36,9 +33,11 @@ function member_update(){
             <tr>
                 <td>Membership Type </td>
                 <td><select name="mem_type">
-                        <option value="Individual" <?php if($member[0]->membership_type=="Individual"){echo "selected";} ?>>
+                        <option value="Individual"
+                            <?php if($member[0]->membership_type=="Individual"){echo "selected";} ?>>
                             Individual</option>
-                        <option value="Institute" <?php if($member[0]->membership_type=="Institute"){echo "selected";} ?>>Institute
+                        <option value="Institute"
+                            <?php if($member[0]->membership_type=="Institute"){echo "selected";} ?>>Institute
                         </option>
                     </select>
                 </td>
@@ -46,7 +45,8 @@ function member_update(){
             <tr>
                 <td>Application Status </td>
                 <td><select name="mem_status">
-                        <option value="Approved" <?php if($member[0]->app_status=="Approved"){echo "selected";} ?>>Approved
+                        <option value="Approved" <?php if($member[0]->app_status=="Approved"){echo "selected";} ?>>
+                            Approved
                         </option>
                         <option value="Pending" <?php if($member[0]->app_status=="Pending"){echo "selected";} ?>>Pending
                         </option>
@@ -112,11 +112,14 @@ function member_update(){
             <tr>
                 <td>ID proof ype </td>
                 <td><select name="mem_id_type">
-                        <option value="Aadhar Card" <?php if($member[0]->id_proof_type=="Aadhar Card"){echo "selected";} ?>>
+                        <option value="Aadhar Card"
+                            <?php if($member[0]->id_proof_type=="Aadhar Card"){echo "selected";} ?>>
                             Aadhar Card</option>
                         <option value="Driving License"
-                            <?php if($member[0]->id_proof_type=="Driving License"){echo "selected";} ?>>Driving License</option>
-                        <option value="Voters ID" <?php if($member[0]->id_proof_type=="Voters ID"){echo "selected";} ?>>Voters ID
+                            <?php if($member[0]->id_proof_type=="Driving License"){echo "selected";} ?>>Driving License
+                        </option>
+                        <option value="Voters ID" <?php if($member[0]->id_proof_type=="Voters ID"){echo "selected";} ?>>
+                            Voters ID
                         </option>
                     </select>
                 </td>
@@ -129,7 +132,8 @@ function member_update(){
                 <td>Amount </td>
                 <td><select name="mem_amount">
                         <option value="2000" <?php if($member[0]->amount=="2000"){echo "selected";} ?>>2,000/-</option>
-                        <option value="10000" <?php if($member[0]->amount=="10000"){echo "selected";} ?>>10,000/-</option>
+                        <option value="10000" <?php if($member[0]->amount=="10000"){echo "selected";} ?>>10,000/-
+                        </option>
                     </select></td>
             </tr>
             <tr>
@@ -143,10 +147,12 @@ function member_update(){
             <tr>
                 <td>Payment Type </td>
                 <td><select name="payment_mode">
-                        <option value="Google Pay" <?php if($member[0]->transaction_type=="Google Pay"){echo "Google Pay";} ?>>
+                        <option value="Google Pay"
+                            <?php if($member[0]->transaction_type=="Google Pay"){echo "Google Pay";} ?>>
                             Google Pay</option>
                         <option value="Bank Transfer"
-                            <?php if($member[0]->transaction_type=="Bank Transfer"){echo "Bank Transfer";} ?>>Bank Transfer</option>
+                            <?php if($member[0]->transaction_type=="Bank Transfer"){echo "Bank Transfer";} ?>>Bank
+                            Transfer</option>
                     </select></td>
             </tr>
             <tr>
@@ -178,8 +184,9 @@ function member_update(){
 if(isset($_POST['upd']))
 {
     global $wpdb;
-    $nnhs_table_name=$wpdb->prefix.'members_list';
-            $s_no=$_POST['s_no'];
+    $nnhs_table_name = $wpdb->prefix . 'members_list';
+
+        //    $s_no=$_POST['s_no'];
             $m_id=$_POST['mem_id'];
             $membership_type=$_POST['mem_type'];
             $app_status=$_POST['mem_status'];
