@@ -10,7 +10,6 @@ function member_delete(){
             $nnhs_table_name,
             array('s_no'=>$i)
         );
-        echo "deleted";
     }
     echo get_site_url() .'/wp-admin/admin.php?page=Members_List';
     ?>

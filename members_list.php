@@ -17,11 +17,22 @@ table {
 }
 
 member_update.php table,
-td,
+td {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+
+}
 th {
     border: 1px solid black;
-    padding: 10px;
+    padding: 5px;
     text-align: center;
+     
+}
+img {
+    width: 70px;
+    height: 90px;
+    object-fit: contain;
 }
 </style>
 <div class="wrap">
@@ -102,7 +113,7 @@ th {
                     <td><?= $member->pay_status; ?></td>
                     <td><?= $member->transaction_type; ?></td>
                     <td><?= $member->transaction_id; ?></td>
-                    <td><?= $member->upload; ?></td>
+                    <td><img src="<?= $member->upload; ?>"></td>
                     <td><?= $member->place; ?></td>
                     <td><?= $member->app_date; ?></td>
                 </tr>

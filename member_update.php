@@ -4,14 +4,26 @@ function member_update(){
     $i=$_GET['s_no'];
     global $wpdb;
     $nnhs_table_name = $wpdb->prefix . 'members_list';
-    $member = $wpdb->get_results("SELECT s_no, m_id, membership_type, app_status, applicant_name, dob, contact_address, tel_res, tel_off, 
+    $membership = $wpdb->get_results("SELECT s_no, m_id, membership_type, app_status, applicant_name, dob, contact_address, tel_res, tel_off, 
     mob, email, profession, name_ins, place_ins, designation, interest, ref_name, ref_detail, id_proof_type, 
     id_proof_no, amount, pay_status, transaction_type, transaction_id, upload, place, app_date from $nnhs_table_name where s_no=$i");
-    //echo $member[0]->s_no;
-    $current_member = $member[0]->s_no;
-    echo "<h3> S.No: $current_member</h3>";
+    
+   $current_member = $membership[0]->s_no;
+   echo "<h3> S.No: $current_member</h3>";
     ?>
+<style>
 
+img {
+    width: 100px;
+    height: 130px;
+    object-fit: contain;
+}
+tr, td {
+    vertical-align: middle;
+    width: 200px;
+
+}
+</style>
 <!---- Form to edit the Row in the databse----->
 <table>
     <thead>
@@ -25,19 +37,19 @@ function member_update(){
     <br>
     <tbody>
         <form name="frm" action="#" method="post">
-            <input type="hidden" name="s_no" value="<?= $member[0]->s_no; ?>">
+            <input type="hidden" name="s_no" value="<?= $membership[0]->s_no; ?>">
             <tr>
                 <td>Membership ID </td>
-                <td> <input type="text" name="mem_id" value="<?= $member[0]->m_id; ?>"> </td>
+                <td> <input type="text" name="mem_id" value="<?= $membership[0]->m_id; ?>"> </td>
             </tr>
             <tr>
                 <td>Membership Type </td>
                 <td><select name="mem_type">
                         <option value="Individual"
-                            <?php if($member[0]->membership_type=="Individual"){echo "selected";} ?>>
+                            <?php if($membership[0]->membership_type=="Individual"){echo "selected";} ?>>
                             Individual</option>
                         <option value="Institute"
-                            <?php if($member[0]->membership_type=="Institute"){echo "selected";} ?>>Institute
+                            <?php if($membership[0]->membership_type=="Institute"){echo "selected";} ?>>Institute
                         </option>
                     </select>
                 </td>
@@ -45,80 +57,80 @@ function member_update(){
             <tr>
                 <td>Application Status </td>
                 <td><select name="mem_status">
-                        <option value="Approved" <?php if($member[0]->app_status=="Approved"){echo "selected";} ?>>
+                        <option value="Approved" <?php if($membership[0]->app_status=="Approved"){echo "selected";} ?>>
                             Approved
                         </option>
-                        <option value="Pending" <?php if($member[0]->app_status=="Pending"){echo "selected";} ?>>Pending
+                        <option value="Pending" <?php if($membership[0]->app_status=="Pending"){echo "selected";} ?>>Pending
                         </option>
                     </select>
                 </td>
             </tr>
             <tr>
                 <td>Name </td>
-                <td> <input type="text" name="mem_name" value="<?= $member[0]->applicant_name; ?>"> </td>
+                <td> <input type="text" name="mem_name" value="<?= $membership[0]->applicant_name; ?>"> </td>
             </tr>
             <tr>
                 <td>Date of Birth </td>
-                <td> <input type="date" name="mem_dob" value="<?= $member[0]->dob; ?>"> </td>
+                <td> <input type="date" name="mem_dob" value="<?= $membership[0]->dob; ?>"> </td>
             </tr>
             <tr>
                 <td>Address </td>
-                <td> <input type="text" name="mem_address" value="<?= $member[0]->contact_address; ?>"> </td>
+                <td> <input type="text" name="mem_address" value="<?= $membership[0]->contact_address; ?>"> </td>
             </tr>
             <tr>
                 <td>Telephone-Residential </td>
-                <td> <input type="tel" name="mem_tel_res" value="<?= $member[0]->tel_res; ?>"> </td>
+                <td> <input type="tel" name="mem_tel_res" value="<?= $membership[0]->tel_res; ?>"> </td>
             </tr>
             <tr>
                 <td>Telephone-Office </td>
-                <td> <input type="tel" name="mem_tel_off" value="<?= $member[0]->tel_off; ?>"> </td>
+                <td> <input type="tel" name="mem_tel_off" value="<?= $membership[0]->tel_off; ?>"> </td>
             </tr>
             <tr>
                 <td>Mobile </td>
-                <td> <input type="tel" name="mem_mobile" value="<?= $member[0]->mob; ?>"> </td>
+                <td> <input type="tel" name="mem_mobile" value="<?= $membership[0]->mob; ?>"> </td>
             </tr>
             <tr>
                 <td>E-mail </td>
-                <td> <input type="text" name="mem_email" value="<?= $member[0]->email; ?>"> </td>
+                <td> <input type="text" name="mem_email" value="<?= $membership[0]->email; ?>"> </td>
             </tr>
             <tr>
                 <td>Profession </td>
-                <td> <input type="text" name="mem_profession" value="<?= $member[0]->profession; ?>"> </td>
+                <td> <input type="text" name="mem_profession" value="<?= $membership[0]->profession; ?>"> </td>
             </tr>
             <tr>
                 <td>Name of Institute </td>
-                <td> <input type="text" name="mem_name_ins" value="<?= $member[0]->name_ins; ?>"> </td>
+                <td> <input type="text" name="mem_name_ins" value="<?= $membership[0]->name_ins; ?>"> </td>
             </tr>
             <tr>
                 <td>Place of Institute </td>
-                <td> <input type="text" name="mem_place_ins" value="<?= $member[0]->place_ins; ?>"> </td>
+                <td> <input type="text" name="mem_place_ins" value="<?= $membership[0]->place_ins; ?>"> </td>
             </tr>
             <tr>
                 <td>Designation </td>
-                <td> <input type="text" name="mem_designation" value="<?= $member[0]->designation; ?>"> </td>
+                <td> <input type="text" name="mem_designation" value="<?= $membership[0]->designation; ?>"> </td>
             </tr>
             <tr>
                 <td>Interest </td>
-                <td> <input type="text" name="mem_interest" value="<?= $member[0]->interest; ?>"> </td>
+                <td> <input type="text" name="mem_interest" value="<?= $membership[0]->interest; ?>"> </td>
             </tr>
             <tr>
                 <td>Reference Name </td>
-                <td> <input type="text" name="mem_ref_name" value="<?= $member[0]->ref_name; ?>"> </td>
+                <td> <input type="text" name="mem_ref_name" value="<?= $membership[0]->ref_name; ?>"> </td>
             </tr>
             <tr>
                 <td>Reference Contact </td>
-                <td> <input type="text" name="mem_ref_detail" value="<?= $member[0]->ref_detail; ?>"> </td>
+                <td> <input type="text" name="mem_ref_detail" value="<?= $membership[0]->ref_detail; ?>"> </td>
             </tr>
             <tr>
                 <td>ID proof ype </td>
                 <td><select name="mem_id_type">
                         <option value="Aadhar Card"
-                            <?php if($member[0]->id_proof_type=="Aadhar Card"){echo "selected";} ?>>
+                            <?php if($membership[0]->id_proof_type=="Aadhar Card"){echo "selected";} ?>>
                             Aadhar Card</option>
                         <option value="Driving License"
-                            <?php if($member[0]->id_proof_type=="Driving License"){echo "selected";} ?>>Driving License
+                            <?php if($membership[0]->id_proof_type=="Driving License"){echo "selected";} ?>>Driving License
                         </option>
-                        <option value="Voters ID" <?php if($member[0]->id_proof_type=="Voters ID"){echo "selected";} ?>>
+                        <option value="Voters ID" <?php if($membership[0]->id_proof_type=="Voters ID"){echo "selected";} ?>>
                             Voters ID
                         </option>
                     </select>
@@ -126,21 +138,21 @@ function member_update(){
             </tr>
             <tr>
                 <td>Id proof no </td>
-                <td> <input type="text" name="mem_id_no" value="<?= $member[0]->id_proof_no; ?>"> </td>
+                <td> <input type="text" name="mem_id_no" value="<?= $membership[0]->id_proof_no; ?>"> </td>
             </tr>
             <tr>
                 <td>Amount </td>
                 <td><select name="mem_amount">
-                        <option value="2000" <?php if($member[0]->amount=="2000"){echo "selected";} ?>>2,000/-</option>
-                        <option value="10000" <?php if($member[0]->amount=="10000"){echo "selected";} ?>>10,000/-
+                        <option value="2000" <?php if($membership[0]->amount=="2000"){echo "selected";} ?>>2,000/-</option>
+                        <option value="10000" <?php if($membership[0]->amount=="10000"){echo "selected";} ?>>10,000/-
                         </option>
                     </select></td>
             </tr>
             <tr>
                 <td>Payment Status </td>
                 <td><select name="mem_payment_status">
-                        <option value="Done" <?php if($member[0]->pay_status=="Done"){echo "selected";} ?>>Done</option>
-                        <option value="Pending" <?php if($member[0]->pay_status=="Pending"){echo "selected";} ?>>Pending
+                        <option value="Done" <?php if($membership[0]->pay_status=="Done"){echo "selected";} ?>>Done</option>
+                        <option value="Pending" <?php if($membership[0]->pay_status=="Pending"){echo "selected";} ?>>Pending
                         </option>
                     </select></td>
             </tr>
@@ -148,29 +160,30 @@ function member_update(){
                 <td>Payment Type </td>
                 <td><select name="payment_mode">
                         <option value="Google Pay"
-                            <?php if($member[0]->transaction_type=="Google Pay"){echo "Google Pay";} ?>>
+                            <?php if($membership[0]->transaction_type=="Google Pay"){echo "Google Pay";} ?>>
                             Google Pay</option>
                         <option value="Bank Transfer"
-                            <?php if($member[0]->transaction_type=="Bank Transfer"){echo "Bank Transfer";} ?>>Bank
+                            <?php if($membership[0]->transaction_type=="Bank Transfer"){echo "Bank Transfer";} ?>>Bank
                             Transfer</option>
                     </select></td>
             </tr>
             <tr>
                 <td>Transaction ID </td>
-                <td> <input type="text" name="mem_transaction_id" value="<?= $member[0]->transaction_id; ?>"> </td>
+                <td> <input type="text" name="mem_transaction_id" value="<?= $membership[0]->transaction_id; ?>"> </td>
             </tr>
             <tr>
                 <td>Photo </td>
-                <td> <input type="file" accept="image/png, image/jpeg, image/jpg" name="mem_photo"
-                        value="<?= $member[0]->upload; ?>"> </td>
+                <td><img src="<?= $membership[0]->upload; ?>"> <br> 
+                    <input type="file" accept="image/png, image/jpeg, image/jpg" name="mem_photo"
+                        value="<?= $membership[0]->upload; ?>"> </td>
             </tr>
             <tr>
                 <td>Place </td>
-                <td> <input type="text" name="mem_place" value="<?= $member[0]->place; ?>"> </td>
+                <td> <input type="text" name="mem_place" value="<?= $membership[0]->place; ?>"> </td>
             </tr>
             <tr>
                 <td>Date </td>
-                <td> <input type="date" name="mem_date" value="<?= $member[0]->app_date; ?>"> </td>
+                <td> <input type="date" name="mem_date" value="<?= $membership[0]->app_date; ?>"> </td>
             </tr>
             <tr>
                 <td></td>
@@ -186,7 +199,7 @@ if(isset($_POST['upd']))
     global $wpdb;
     $nnhs_table_name = $wpdb->prefix . 'members_list';
 
-        //    $s_no=$_POST['s_no'];
+           $s_no=$_POST['s_no'];
             $m_id=$_POST['mem_id'];
             $membership_type=$_POST['mem_type'];
             $app_status=$_POST['mem_status'];
@@ -245,7 +258,7 @@ if(isset($_POST['upd']))
             'app_date' => $app_date            
         ),
         array(
-            's_no '=> $s_no
+            's_no'=> $s_no
         )
     );
      
