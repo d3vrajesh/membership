@@ -16,7 +16,7 @@ function member_update(){
 img {
     width: 100px;
     height: 130px;
-    object-fit: contain;
+    object-fit: cover;
 }
 tr, td {
     vertical-align: middle;

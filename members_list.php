@@ -32,7 +32,7 @@ th {
 img {
     width: 70px;
     height: 90px;
-    object-fit: contain;
+    object-fit: cover;
 }
 </style>
 <div class="wrap">
