@@ -3,16 +3,29 @@
 function members_list() {
     ?>
 <style>
-scroll-table {
+
+.scroll-table {
     display: box;
     overflow-x: auto;
     overflow-y: hidden;
-    border: 1px solid green;
+    border: 2px solid green;     
+    padding: 20px;
+    height: 650px;
+    overflow-y: scroll;
+    
+}
+.membership-title {
+    text-align: center;
+    font-size: 16pt;
+    font-weight: bold;
+    padding-top: 40px;
+    color: green;
 }
 
 table {
     border-collapse: collapse;
-
+    background-color: #ffffff;
+   
 
 }
 
@@ -33,10 +46,13 @@ img {
     width: 70px;
     height: 90px;
     object-fit: cover;
+    
 }
 </style>
 <div class="wrap">
+<div class="membership-title"> Membership List</div> <br>
     <div class="scroll-table">
+    
         <table>
             <thead>
                 <tr>
@@ -88,7 +104,7 @@ img {
                     <td><?= $member->membership_type; ?></td>
                     <td><?= $member->app_status; ?></td>
                     <td><a
-                            href="<?php echo admin_url('admin.php?page=Member_Update&s_no=' . $member->s_no); ?>">Update</a>
+                            href="<?php echo admin_url('admin.php?page=Member_Update&s_no=' . $member->s_no); ?>">Update</i></a>
                     </td>
                     <td><a
                             href="<?php echo admin_url('admin.php?page=Member_Delete&s_no=' . $member->s_no); ?>">Delete</a>

@@ -1,5 +1,15 @@
 <?php
+
+$path = preg_replace('/wp-content.*$/','',__DIR__);
+require_once($path."wp-load.php");
+
+if ( ! function_exists( 'wp_handle_upload' ) ) {
+    require_once( ABSPATH . 'wp-admin/includes/file.php' );
+}
+
 function member_update(){
+
+
 //Updating form data in the database    
     $i=$_GET['s_no'];
     global $wpdb;
@@ -61,6 +71,8 @@ tr, td {
                             Approved
                         </option>
                         <option value="Pending" <?php if($membership[0]->app_status=="Pending"){echo "selected";} ?>>Pending
+                        </option>
+                        <option value="Not Considered" <?php if($membership[0]->app_status=="Not Considered"){echo "selected";} ?>>Pending
                         </option>
                     </select>
                 </td>
@@ -151,17 +163,22 @@ tr, td {
             <tr>
                 <td>Payment Status </td>
                 <td><select name="mem_payment_status">
-                        <option value="Done" <?php if($membership[0]->pay_status=="Done"){echo "selected";} ?>>Done</option>
-                        <option value="Pending" <?php if($membership[0]->pay_status=="Pending"){echo "selected";} ?>>Pending
+                         
+                        <option value="Pending" <?php if($membership[0]->pay_status=="Pending"){echo "Pending";} ?>>Pending
                         </option>
+                        <option value="Done" <?php if($membership[0]->pay_status=="Done"){echo "Done";} ?>>Done</option>
                     </select></td>
             </tr>
             <tr>
                 <td>Payment Type </td>
                 <td><select name="payment_mode">
-                        <option value="Google Pay"
-                            <?php if($membership[0]->transaction_type=="Google Pay"){echo "Google Pay";} ?>>
-                            Google Pay</option>
+                
+                        <option value="-Select-"
+                            <?php if($membership[0]->transaction_type=="-Select-"){echo "-Select-";} ?>>
+                            -Select-</option>                        
+                        <option value="Cheque"
+                            <?php if($membership[0]->transaction_type=="Cheque"){echo "Cheque";} ?>>
+                            Cheque</option>
                         <option value="Bank Transfer"
                             <?php if($membership[0]->transaction_type=="Bank Transfer"){echo "Bank Transfer";} ?>>Bank
                             Transfer</option>
@@ -173,9 +190,9 @@ tr, td {
             </tr>
             <tr>
                 <td>Photo </td>
-                <td><img src="<?= $membership[0]->upload; ?>"> <br> 
-                    <input type="file" accept="image/png, image/jpeg, image/jpg" name="mem_photo"
-                        value="<?= $membership[0]->upload; ?>"> </td>
+                <td><img src="<?= $membership[0]->upload; ?>">  
+                 <!-- <br><input type="file" accept="image/png, image/jpeg, image/jpg" name="mem_photo"
+                        value="<#remove#?= // $membership[0]->upload; ?>"> --></td> 
             </tr>
             <tr>
                 <td>Place </td>
@@ -194,8 +211,12 @@ tr, td {
 </table>
 <?php
 }
+
+
+
 if(isset($_POST['upd']))
 {
+
     global $wpdb;
     $nnhs_table_name = $wpdb->prefix . 'members_list';
 
@@ -223,7 +244,7 @@ if(isset($_POST['upd']))
             $pay_status=$_POST['mem_payment_status'];
             $transaction_type=$_POST['payment_mode'];
             $transaction_id=$_POST['mem_transaction_id'];
-            $upload=$_POST['mem_photo'];
+            //$upload=$_POST['mem_photo'];
             $place=$_POST['mem_place'];
             $app_date=$_POST['mem_date'];
 
@@ -253,7 +274,7 @@ if(isset($_POST['upd']))
             'pay_status' => $pay_status,
             'transaction_type' => $transaction_type,
             'transaction_id' => $transaction_id,
-            'upload' => $upload,
+            //'upload' => $upload,
             'place' => $place,
             'app_date' => $app_date            
         ),
@@ -266,9 +287,11 @@ if(isset($_POST['upd']))
       
      ?>
 <meta http-equiv="refresh" content="1; url=http://localhost/nnhs/wp-admin/admin.php?page=Members_Listing" />
+
 <?php
     exit;
     
      
 }
+
 ?>
