@@ -21,7 +21,8 @@ function jal_install() {
     $charset_collate = $wpdb->get_charset_collate();
 
     $sql = "CREATE TABLE $nnhs_table_name (
-		s_no int(10) NOT NULL AUTO_INCREMENT,
+		
+        s_no int(10) NOT NULL AUTO_INCREMENT,
 		m_id text(30),
         membership_type text(30),
         app_status varchar(20),
@@ -34,8 +35,9 @@ function jal_install() {
         email varchar(50),
         profession varchar(40),
         name_ins varchar(50),
+		type_institution varchar (50),
         place_ins varchar(50),
-        designation varchar(40),
+        designation varchar(40),     
         interest varchar(220),
         ref_name varchar(30),
         ref_detail varchar(50),
@@ -48,7 +50,8 @@ function jal_install() {
         upload text(200),
         place text(30),
         app_date date,
-		PRIMARY KEY (s_no)  
+		PRIMARY KEY (s_no)
+      
 	) $charset_collate;";
 
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
