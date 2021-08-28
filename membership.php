@@ -99,7 +99,7 @@ function at_try_menu() {
 // returns the root directory path of particular plugin
 define('ROOTDIR', plugin_dir_path(__FILE__));
 require_once(ROOTDIR . 'members_list.php');
-//require_once (ROOTDIR.'member_insert.php');
-//require_once (ROOTDIR.'member_update.php');
+require_once (ROOTDIR.'member_insert.php');
+require_once (ROOTDIR.'member_update.php');
 require_once (ROOTDIR.'member_delete.php');
 ?>
