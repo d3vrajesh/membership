@@ -72,6 +72,7 @@ img {
                     <th>E-mail</th>
                     <th>Profession</th>
                     <th>Name of Institute</th>
+                    <th>Type of Institute</th>
                     <th>Place of Institute</th>
                     <th>Designation</th>
                     <th>Interest</th>
@@ -81,7 +82,7 @@ img {
                     <th>Id proof no</th>
                     <th>Amount</th>
                     <th>Payment Status</th>
-                    <th>Payment Type</th>
+                    <th>Mode of Payment </th>
                     <th>Transaction ID</th>
                     <th>Photo</th>
                     <th>Place</th>
@@ -94,7 +95,7 @@ img {
             global $wpdb;
             $nnhs_table_name = $wpdb->prefix . 'members_list';
             $membership = $wpdb->get_results("SELECT s_no, m_id, membership_type, app_status, applicant_name, dob, contact_address, tel_res, tel_off, 
-            mob, email, profession, name_ins, place_ins, designation, interest, ref_name, ref_detail, id_proof_type, 
+            mob, email, profession, name_ins, type_institution, place_ins, designation, interest, ref_name, ref_detail, id_proof_type, 
             id_proof_no, amount, pay_status, transaction_type, transaction_id, upload, place, app_date from $nnhs_table_name ORDER BY s_no DESC");
             foreach ($membership as $member) {
                 ?>
@@ -118,6 +119,7 @@ img {
                     <td><?= $member->email; ?></td>
                     <td><?= $member->profession; ?></td>
                     <td><?= $member->name_ins; ?></td>
+                    <td><?= $member->type_institution; ?></td>
                     <td><?= $member->place_ins; ?></td>
                     <td><?= $member->designation; ?></td>
                     <td><?= $member->interest; ?></td>

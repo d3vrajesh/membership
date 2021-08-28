@@ -20,9 +20,8 @@ function jal_install() {
     $nnhs_table_name = $wpdb->prefix . 'members_list'; 
     $charset_collate = $wpdb->get_charset_collate();
 
-    $sql = "CREATE TABLE $nnhs_table_name (
-		
-        s_no int(10) NOT NULL AUTO_INCREMENT,
+    $sql = "CREATE TABLE $nnhs_table_name ( 
+	    s_no int(10) NOT NULL AUTO_INCREMENT,
 		m_id text(30),
         membership_type text(30),
         app_status varchar(20),
@@ -51,7 +50,8 @@ function jal_install() {
         place text(30),
         app_date date,
 		PRIMARY KEY (s_no)
-      
+
+		
 	) $charset_collate;";
 
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
@@ -73,14 +73,14 @@ function at_try_menu() {
         'dashicons-id'
     );
     //adding submenu to a menu
-    /*
+   
     add_submenu_page('Members_Listing',//parent page slug
         'member_insert',//page title
         'Add Member',//menu titel
         'manage_options',//manage optios
         'Member_Insert',//slug
         'member_insert'//function
-    ); */
+    ); 
     add_submenu_page( null,//parent page slug
         'member_update',//$page_title
         'Member Update',// $menu_title
@@ -100,6 +100,6 @@ function at_try_menu() {
 define('ROOTDIR', plugin_dir_path(__FILE__));
 require_once(ROOTDIR . 'members_list.php');
 //require_once (ROOTDIR.'member_insert.php');
-require_once (ROOTDIR.'member_update.php');
+//require_once (ROOTDIR.'member_update.php');
 require_once (ROOTDIR.'member_delete.php');
 ?>

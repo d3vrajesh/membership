@@ -14,9 +14,7 @@ function member_update(){
     $i=$_GET['s_no'];
     global $wpdb;
     $nnhs_table_name = $wpdb->prefix . 'members_list';
-    $membership = $wpdb->get_results("SELECT s_no, m_id, membership_type, app_status, applicant_name, dob, contact_address, tel_res, tel_off, 
-    mob, email, profession, name_ins, place_ins, designation, interest, ref_name, ref_detail, id_proof_type, 
-    id_proof_no, amount, pay_status, transaction_type, transaction_id, upload, place, app_date from $nnhs_table_name where s_no=$i");
+    $membership = $wpdb->get_results("SELECT s_no, m_id, membership_type, app_status, applicant_name, dob, contact_address, tel_res, tel_off, mob, email, profession, name_ins, type_institution, place_ins, designation, interest, ref_name, ref_detail, id_proof_type, id_proof_no, amount, pay_status, transaction_type, transaction_id, upload, place, app_date from $nnhs_table_name where s_no=$i");
     
    $current_member = $membership[0]->s_no;
    echo "<h3> S.No: $current_member</h3>";
@@ -110,11 +108,15 @@ tr, td {
                 <td> <input type="text" name="mem_profession" value="<?= $membership[0]->profession; ?>"> </td>
             </tr>
             <tr>
-                <td>Name of Institute </td>
+                <td>Name of Institution </td>
                 <td> <input type="text" name="mem_name_ins" value="<?= $membership[0]->name_ins; ?>"> </td>
             </tr>
             <tr>
-                <td>Place of Institute </td>
+                <td>Type of Institution </td>
+                <td> <input type="text" name="mem_type_ins" value="<?= $membership[0]->type_institution; ?>"> </td>
+            </tr>       
+            <tr>
+                <td>Place of Institution </td>
                 <td> <input type="text" name="mem_place_ins" value="<?= $membership[0]->place_ins; ?>"> </td>
             </tr>
             <tr>
@@ -233,6 +235,7 @@ if(isset($_POST['upd']))
             $email=$_POST['mem_email'];
             $profession=$_POST['mem_profession'];
             $name_ins=$_POST['mem_name_ins'];
+            $type_institution = $_POST['mem_type_ins']
             $place_ins=$_POST['mem_place_ins'];
             $designation=$_POST['mem_designation'];
             $interest=$_POST['mem_interest'];
@@ -263,6 +266,7 @@ if(isset($_POST['upd']))
             'email' => $email,
             'profession' => $profession,
             'name_ins' => $name_ins,
+            'type_institution' => $type_institution,
             'place_ins' => $place_ins,
             'designation' => $designation,
             'interest' => $interest,

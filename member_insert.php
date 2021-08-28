@@ -75,6 +75,10 @@ function member_insert()
                 <td> <input type="text" name="mem_name_ins"> </td>
             <tr>
             <tr>
+                <td>Type of Institute </td>
+                <td> <input type="text" name="mem_type_ins"> </td>
+            <tr>
+            <tr>
                 <td>Place of Institute </td>
                 <td> <input type="text" name="mem_place_ins"> </td>
             <tr>
@@ -169,6 +173,7 @@ function member_insert()
         $email=$_POST['mem_email'];
         $profession=$_POST['mem_profession'];
         $name_ins=$_POST['mem_name_ins'];
+        $type_institution = $_POST['mem_type_ins']
         $place_ins=$_POST['mem_place_ins'];
         $designation=$_POST['mem_designation'];
         $interest=$_POST['mem_interest'];
@@ -201,6 +206,7 @@ function member_insert()
                 'email' => $email,
                 'profession' => $profession,
                 'name_ins' => $name_ins,
+                'type_institution' => $type_institution,
                 'place_ins' => $place_ins,
                 'designation' => $designation,
                 'interest' => $interest,
