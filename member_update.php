@@ -205,6 +205,16 @@ tr, td {
                 <td> <input type="date" name="mem_date" value="<?= $membership[0]->app_date; ?>"> </td>
             </tr>
             <tr>
+                <td>Do you want to send an email to the applicant?  </td>
+                <td> <input type="checkbox" name="email_accept" value="email_accept"> </td>
+            </tr>   
+            <tr>
+                <td>Type your Message </td>
+                <td> <textarea name="email_message" rows="5" cols="33" maxlength="200"
+                value="<?= $membership[0]->email; ?>"> </textarea>
+                </td>
+            </tr>
+            <tr>
                 <td></td>
                 <td><input type="submit" value="Update" name="upd"></td>
             </tr>
@@ -213,8 +223,6 @@ tr, td {
 </table>
 <?php
 }
-
-
 
 if(isset($_POST['upd']))
 {
@@ -235,7 +243,7 @@ if(isset($_POST['upd']))
             $email=$_POST['mem_email'];
             $profession=$_POST['mem_profession'];
             $name_ins=$_POST['mem_name_ins'];
-            $type_institution = $_POST['mem_type_ins']
+            $type_institution = $_POST['mem_type_ins'];
             $place_ins=$_POST['mem_place_ins'];
             $designation=$_POST['mem_designation'];
             $interest=$_POST['mem_interest'];
@@ -250,6 +258,19 @@ if(isset($_POST['upd']))
             //$upload=$_POST['mem_photo'];
             $place=$_POST['mem_place'];
             $app_date=$_POST['mem_date'];
+
+            // Email section 
+            $email_accept = $_POST['email_accept]'];
+            $email_message = $_POST['email_message'];
+
+                $to = 'contact@nnhs.in'; 
+			    $subject = "NNHS Membership";
+				$body = $email_message;
+				$headers = array('Content-Type: text/html; charset=UTF-8', 'From: NNHS <wordpress@nnhs.in>');					 
+ 				
+                    
+
+
 
     $wpdb->update(
         $nnhs_table_name,
@@ -286,6 +307,10 @@ if(isset($_POST['upd']))
             's_no'=> $s_no
         )
     );
+    if($email_accept == "email-accept")
+    {
+        wp_mail( $to, $subject, $body, $headers );
+    }
      
     $url=admin_url('admin.php?page=Members_Listing');
       

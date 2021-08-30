@@ -12,7 +12,7 @@ function member_insert()
         </tr>
     </thead>
     <tbody>
-        <form name="frm" action="#" method="post">
+        <form name="frm" action="#" method="post" enctype="multipart/form-data">
             <!--            <tr>
                 <td>S.No </td>
                 <td input type="hidden" name="s_no"> </td>>
@@ -137,7 +137,7 @@ function member_insert()
                 <td> <input type="text" name="mem_transaction_id"> </td>
             <tr>
             <tr>
-                <td>Photo </td>
+                <td>Photo (File name should not contain space)</td>
                 <td> <input type="file" accept="image/png, image/jpeg, image/jpg" name="mem_photo"> </td>
             <tr>
             <tr>
@@ -155,6 +155,8 @@ function member_insert()
         </form>
     </tbody>
 </table>
+ 
+
 
 <?php
 // Inserting the form data in the databse table  
@@ -173,7 +175,7 @@ function member_insert()
         $email=$_POST['mem_email'];
         $profession=$_POST['mem_profession'];
         $name_ins=$_POST['mem_name_ins'];
-        $type_institution = $_POST['mem_type_ins']
+        $type_institution = $_POST['mem_type_ins'];
         $place_ins=$_POST['mem_place_ins'];
         $designation=$_POST['mem_designation'];
         $interest=$_POST['mem_interest'];
@@ -185,10 +187,57 @@ function member_insert()
         $pay_status=$_POST['mem_payment_status'];
         $transaction_type=$_POST['payment_mode'];
         $transaction_id=$_POST['mem_transaction_id'];
-        $upload=$_POST['mem_photo'];
+        //$upload=$_POST['mem_photo'];
         $place=$_POST['mem_place'];
         $app_date=$_POST['mem_date'];
         
+        //=======================CODE BACKUP=============================
+        /*
+        if ( ! function_exists( 'wp_handle_upload' ) ) 
+            require_once( ABSPATH . 'wp-admin/includes/file.php' );
+            $uploadedfile = $_FILES['mem_photo'];
+            $upload_overrides = array( 'test_form' => false );
+            $movefile = wp_handle_upload( $uploadedfile, $upload_overrides );
+        
+
+
+        if ( $movefile ) {
+            echo "File is valid, and was successfully uploaded.\n";
+            var_dump( $movefile );
+            // here you can do some stuff with this
+        }
+        ==================================================*/
+
+
+        //-----------Rename Uploaded File 
+
+         
+        //------------Upload file to directory
+        if ( ! function_exists( 'wp_handle_upload' ) ) 
+            require_once( ABSPATH . 'wp-admin/includes/file.php' );
+            $upload_file = $_FILES['mem_photo'];
+            $upload_file_extension =  end(explode('.', $_FILES['mem_photo'])); // Get upload file extension
+            $rename_format = md5(rand());
+            $new_upload_file = $rename_format .".".$upload_file_extension; 
+            //$uploadedfile = $_FILES['mem_photo'];
+            $upload_overrides = array( 'test_form' => false );
+            $movefile = wp_handle_upload( $new_upload_file, $upload_overrides );
+
+        if ( $movefile ) {
+            echo "File is valid, and was successfully uploaded.\n";
+            var_dump( $movefile );
+            
+        } 
+
+
+        $target_dir_array = wp_upload_dir();
+        $target_dir = $target_dir_array[path];
+        $target_file = $target_dir . basename($_FILES['mem_photo']['name']);
+        $uploadedfileurl= $target_dir . "/" .basename($_FILES['mem_photo']['name']);
+
+   
+   
+
         $nnhs_table_name = $wpdb->prefix . 'members_list';
 
         $wpdb->insert(
@@ -218,12 +267,18 @@ function member_insert()
                 'pay_status' => $pay_status,
                 'transaction_type' => $transaction_type,
                 'transaction_id' => $transaction_id,
-                'upload' => $upload,
+                'upload' => $uploadedfileurl,
                 'place' => $place,
                 'app_date' => $app_date            )
         );
-        echo "inserted";
+        
+        //echo "inserted";
          ?>
+
+
+
+
+
 
 <meta http-equiv="refresh" content="1; url=http://localhost/nnhs/wp-admin/admin.php?page=Members_Listing" />
 
@@ -232,4 +287,6 @@ function member_insert()
     }
 }
 
+
 ?>
+
