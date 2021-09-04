@@ -214,30 +214,28 @@ function member_insert()
          
         //------------Upload file to directory
         if ( ! function_exists( 'wp_handle_upload' ) ) 
-            require_once( ABSPATH . 'wp-admin/includes/file.php' );
-            $upload_file = $_FILES['mem_photo'];
-            $upload_file_extension =  end(explode('.', $_FILES['mem_photo'])); // Get upload file extension
-            $rename_format = md5(rand());
-            $new_upload_file = $rename_format .".".$upload_file_extension; 
-            //$uploadedfile = $_FILES['mem_photo'];
-            $upload_overrides = array( 'test_form' => false );
-            $movefile = wp_handle_upload( $new_upload_file, $upload_overrides );
-
-        if ( $movefile ) {
-            echo "File is valid, and was successfully uploaded.\n";
-            var_dump( $movefile );
-            
-        } 
+          require_once( ABSPATH . 'wp-admin/includes/file.php' );
+          $uploadedfile = $_FILES['mem_photo']; 
 
 
-        $target_dir_array = wp_upload_dir();
-        $target_dir = $target_dir_array[path];
-        $target_file = $target_dir . basename($_FILES['mem_photo']['name']);
-        $uploadedfileurl= $target_dir . "/" .basename($_FILES['mem_photo']['name']);
 
-   
-   
+          $newfilename = wp_unique_filename( $path_being_saved_to, $filename_to_check );     
+         $upload_overrides = array( 'test_form' => false);
 
+          $movefile = wp_handle_upload( $uploadedfile, $upload_overrides );
+          
+          if ( $movefile ) {
+              var_dump( $movefile );
+              
+          }
+          // -----------------Uploaed file Url --------------------
+          $target_dir_array = wp_upload_dir();
+          $target_dir = $target_dir_array[url];
+          $target_file = $target_dir . basename($_FILES['mem_photo']['name']);
+          $uploadedfileurl= $target_dir . "/" .basename($_FILES['mem_photo']['name']);
+
+
+          // -----------------Inserting Data to the databse --------------------
         $nnhs_table_name = $wpdb->prefix . 'members_list';
 
         $wpdb->insert(
