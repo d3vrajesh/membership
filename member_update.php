@@ -206,12 +206,11 @@ tr, td {
             </tr>
             <tr>
                 <td>Do you want to send an email to the applicant?  </td>
-                <td> <input type="checkbox" name="email_accept" value="email_accept"> </td>
+                <td> <input type="checkbox" name="email_accept" value="yes"> </td>
             </tr>   
             <tr>
                 <td>Type your Message </td>
-                <td> <textarea name="email_message" rows="5" cols="33" maxlength="200"
-                value="<?= $membership[0]->email; ?>"> </textarea>
+                <td> <textarea name="email_message" rows="5" cols="33" maxlength="200"> </textarea>
                 </td>
             </tr>
             <tr>
@@ -259,18 +258,25 @@ if(isset($_POST['upd']))
             $place=$_POST['mem_place'];
             $app_date=$_POST['mem_date'];
 
-            // Email section 
-            $email_accept = $_POST['email_accept]'];
+            //------------Email section 
+           
+            $email_accept = $_POST['email_accept'];
             $email_message = $_POST['email_message'];
 
-                $to = 'contact@nnhs.in'; 
+                $to = "rajeshr@keystone-foundation.org"; 
 			    $subject = "NNHS Membership";
-				$body = $email_message;
+			//	$body = $email_message;
+				$message = "hello nnhs";
 				$headers = array('Content-Type: text/html; charset=UTF-8', 'From: NNHS <wordpress@nnhs.in>');					 
  				
-                    
-
-
+          $yes = "yes";         
+   /* if($email_accept == $yes)
+    {
+       // wp_mail( $to, $subject, $body, $headers );
+       wp_mail( $to, $subject, $message );
+    }  
+    */
+     
 
     $wpdb->update(
         $nnhs_table_name,
@@ -307,15 +313,13 @@ if(isset($_POST['upd']))
             's_no'=> $s_no
         )
     );
-    if($email_accept == "email-accept")
-    {
-        wp_mail( $to, $subject, $body, $headers );
-    }
+    
+    
      
     $url=admin_url('admin.php?page=Members_Listing');
       
      ?>
-<meta http-equiv="refresh" content="1; url=http://localhost/nnhs/wp-admin/admin.php?page=Members_Listing" />
+<meta http-equiv="refresh" content="1; url=https://nnhs.in/wp-admin/admin.php?page=Members_Listing" />
 
 <?php
     exit;

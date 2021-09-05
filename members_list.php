@@ -9,17 +9,30 @@ function members_list() {
     overflow-x: auto;
     overflow-y: hidden;
     border: 2px solid green;     
-    padding: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
     height: 650px;
     overflow-y: scroll;
     
 }
 .membership-title {
     text-align: center;
-    font-size: 16pt;
+    font-size: 20pt;
     font-weight: bold;
     padding-top: 40px;
-    color: green;
+    color: #046f32;
+}
+.csv-export-button {
+    background-color: #555555;
+    color: #ffffff;
+    padding: 10px;
+    font-size: 12pt;
+    border: none;
+    border-radius: 10px;
+}
+.csv-export-button:hover {
+    background-color: #046f32;
 }
 
 table {
@@ -31,7 +44,7 @@ table {
 
 member_update.php table,
 td {
-    border: 1px solid black;
+    border: 1px solid green;
     padding: 5px;
     text-align: center;
 
@@ -40,6 +53,11 @@ th {
     border: 1px solid black;
     padding: 5px;
     text-align: center;
+      position: sticky;
+  top: 0; /* Don't forget this, required for the stickiness */
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4); 
+  background-color: #046f32;
+  color: white;
      
 }
 img {
@@ -51,6 +69,7 @@ img {
 </style>
 <div class="wrap">
 <div class="membership-title"> Membership List</div> <br>
+<div class="membership-export-button"> <button class="csv-export-button"> Export CSV</button></div> <br>
     <div class="scroll-table">
     
         <table>

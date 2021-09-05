@@ -189,28 +189,7 @@ function member_insert()
         $transaction_id=$_POST['mem_transaction_id'];
         //$upload=$_POST['mem_photo'];
         $place=$_POST['mem_place'];
-        $app_date=$_POST['mem_date'];
-        
-        //=======================CODE BACKUP=============================
-        /*
-        if ( ! function_exists( 'wp_handle_upload' ) ) 
-            require_once( ABSPATH . 'wp-admin/includes/file.php' );
-            $uploadedfile = $_FILES['mem_photo'];
-            $upload_overrides = array( 'test_form' => false );
-            $movefile = wp_handle_upload( $uploadedfile, $upload_overrides );
-        
-
-
-        if ( $movefile ) {
-            echo "File is valid, and was successfully uploaded.\n";
-            var_dump( $movefile );
-            // here you can do some stuff with this
-        }
-        ==================================================*/
-
-
-        //-----------Rename Uploaded File 
-
+        $app_date=$_POST['mem_date']; 
          
         //------------Upload file to directory
         if ( ! function_exists( 'wp_handle_upload' ) ) 
@@ -270,13 +249,8 @@ function member_insert()
                 'app_date' => $app_date            )
         );
         
-        //echo "inserted";
+
          ?>
-
-
-
-
-
 
 <meta http-equiv="refresh" content="1; url=http://localhost/nnhs/wp-admin/admin.php?page=Members_Listing" />
 
