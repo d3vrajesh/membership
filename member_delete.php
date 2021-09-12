@@ -1,7 +1,6 @@
 <?php
 //Deleting the Row in the databse table;
 function member_delete(){
-    echo "member delete";
     if(isset($_GET['s_no'])){
         global $wpdb;
         $nnhs_table_name=$wpdb->prefix.'members_list';
@@ -15,8 +14,6 @@ function member_delete(){
     ?>
 <meta http-equiv="refresh" content="0; url=http://localhost/nnhs/wp-admin/admin.php?page=Members_Listing" />
 <?php
-    
-    exit;
-     
+    exit;  
 }
 ?>

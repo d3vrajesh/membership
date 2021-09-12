@@ -1,5 +1,4 @@
 <?php
-
 /*
   Plugin Name: NNHS-Membership
   Description: This plugin allows users to Insert, Update and Delete membership details in the database. 
@@ -12,7 +11,6 @@
 
 //global $jal_db_version;
 //$jal_db_version = '1.0';
-
 function jal_install() {
     global $wpdb;
 //    global $jal_db_version;

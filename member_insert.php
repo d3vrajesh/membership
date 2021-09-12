@@ -1,5 +1,4 @@
 <?php
-
 function member_insert()
 {
  // creating form to add new member data   
@@ -155,9 +154,6 @@ function member_insert()
         </form>
     </tbody>
 </table>
- 
-
-
 <?php
 // Inserting the form data in the databse table  
     if(isset($_POST['ins'])){
@@ -195,28 +191,19 @@ function member_insert()
         if ( ! function_exists( 'wp_handle_upload' ) ) 
           require_once( ABSPATH . 'wp-admin/includes/file.php' );
           $uploadedfile = $_FILES['mem_photo']; 
-
-
-
           $newfilename = wp_unique_filename( $path_being_saved_to, $filename_to_check );     
          $upload_overrides = array( 'test_form' => false);
-
           $movefile = wp_handle_upload( $uploadedfile, $upload_overrides );
-          
           if ( $movefile ) {
               var_dump( $movefile );
-              
           }
           // -----------------Uploaed file Url --------------------
           $target_dir_array = wp_upload_dir();
           $target_dir = $target_dir_array[url];
           $target_file = $target_dir . basename($_FILES['mem_photo']['name']);
           $uploadedfileurl= $target_dir . "/" .basename($_FILES['mem_photo']['name']);
-
-
           // -----------------Inserting Data to the databse --------------------
         $nnhs_table_name = $wpdb->prefix . 'members_list';
-
         $wpdb->insert(
             $nnhs_table_name,
             array(
@@ -246,19 +233,12 @@ function member_insert()
                 'transaction_id' => $transaction_id,
                 'upload' => $uploadedfileurl,
                 'place' => $place,
-                'app_date' => $app_date            )
+                'app_date' => $app_date)
         );
-        
-
          ?>
-
 <meta http-equiv="refresh" content="1; url=http://localhost/nnhs/wp-admin/admin.php?page=Members_Listing" />
-
 <?php
         exit;
     }
 }
-
-
 ?>
-

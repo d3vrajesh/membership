@@ -69,7 +69,7 @@ img {
 </style>
 <div class="wrap">
 <div class="membership-title"> Membership List</div> <br>
-<div class="membership-export-button"> <button class="csv-export-button"> Export CSV</button></div> <br>
+<div class="membership-export-button"> <button class="csv-export-button" name="export_csv"> Export CSV</button></div> <br>
     <div class="scroll-table">
     
         <table>
@@ -154,10 +154,30 @@ img {
                     <td><?= $member->place; ?></td>
                     <td><?= $member->app_date; ?></td>
                 </tr>
-                <?php } ?>
+                <?php } /*
+                
+                if(isset($_POST["export_csv"]))
+                {
+                    
+                    $nnhs_table_name = $wpdb->prefix . 'members_list';
+                    header('Content-Type: text/csv; charset=utf-8');
+                    header('Content-Disposition: attachment; filename=membership.csv');
+                    $output = fopen("php://output", "w");
+                    fputcsv($output, array('s_no', 'm_id', 'membership_type', 'app_status', 'applicant_name', 'dob', 'contact_address', 'tel_res', 'tel_off', 'mob', 'email', 'profession', 'name_ins', 'type_institution', 'place_ins', 'designation', 'interest', 'ref_name', 'ref_detail', 'id_proof_type', 'id_proof_no', 'amount', 'pay_status', 'transaction_type', 'transaction_id', 'upload', 'place', 'app_date'));
+                    $query = "SELECT * from $nnhs_table_name ORDER BY id DESC");
+                    $result = mysqli_query($connect, $query);
+                    while($row = mysqli_fetch_assoc($result))
+                    {
+                        fputcsv($output, $row);
+                    }
+                    fclose($output);
+                    }
 
+                    $folder = 
+                }
+                */
+                ?> 
             </tbody>
-
         </table>
     </div>
 </div>

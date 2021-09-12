@@ -1,15 +1,9 @@
 <?php
-
 $path = preg_replace('/wp-content.*$/','',__DIR__);
 require_once($path."wp-load.php");
-
 if ( ! function_exists( 'wp_handle_upload' ) ) {
-    require_once( ABSPATH . 'wp-admin/includes/file.php' );
-}
-
+    require_once( ABSPATH . 'wp-admin/includes/file.php' );}
 function member_update(){
-
-
 //Updating form data in the database    
     $i=$_GET['s_no'];
     global $wpdb;
@@ -20,7 +14,6 @@ function member_update(){
    echo "<h3> S.No: $current_member</h3>";
     ?>
 <style>
-
 img {
     width: 100px;
     height: 130px;
@@ -29,7 +22,6 @@ img {
 tr, td {
     vertical-align: middle;
     width: 200px;
-
 }
 </style>
 <!---- Form to edit the Row in the databse----->
@@ -37,8 +29,6 @@ tr, td {
     <thead>
         <tr>
             <th>Update the member details</th>
-
-
         </tr>
 
     </thead>
@@ -70,7 +60,7 @@ tr, td {
                         </option>
                         <option value="Pending" <?php if($membership[0]->app_status=="Pending"){echo "selected";} ?>>Pending
                         </option>
-                        <option value="Not Considered" <?php if($membership[0]->app_status=="Not Considered"){echo "selected";} ?>>Pending
+                        <option value="Not Considered" <?php if($membership[0]->app_status=="Not Considered"){echo "selected";} ?>>Not Considered
                         </option>
                     </select>
                 </td>
@@ -208,9 +198,14 @@ tr, td {
                 <td>Do you want to send an email to the applicant?  </td>
                 <td> <input type="checkbox" name="email_accept" value="yes"> </td>
             </tr>   
+                        <tr>
+                <td>Email Subject </td>
+                <td> <textarea name="email_subject" rows="3" cols="33" maxlength="100"> </textarea>
+                </td>
+            </tr>
             <tr>
-                <td>Type your Message </td>
-                <td> <textarea name="email_message" rows="5" cols="33" maxlength="200"> </textarea>
+                <td>Email Message </td>
+                <td> <textarea name="email_message" rows="5" cols="33" maxlength="300"> </textarea>
                 </td>
             </tr>
             <tr>
@@ -222,10 +217,8 @@ tr, td {
 </table>
 <?php
 }
-
 if(isset($_POST['upd']))
 {
-
     global $wpdb;
     $nnhs_table_name = $wpdb->prefix . 'members_list';
 
@@ -256,28 +249,7 @@ if(isset($_POST['upd']))
             $transaction_id=$_POST['mem_transaction_id'];
             //$upload=$_POST['mem_photo'];
             $place=$_POST['mem_place'];
-            $app_date=$_POST['mem_date'];
-
-            //------------Email section 
-           
-            $email_accept = $_POST['email_accept'];
-            $email_message = $_POST['email_message'];
-
-                $to = "rajeshr@keystone-foundation.org"; 
-			    $subject = "NNHS Membership";
-			//	$body = $email_message;
-				$message = "hello nnhs";
-				$headers = array('Content-Type: text/html; charset=UTF-8', 'From: NNHS <wordpress@nnhs.in>');					 
- 				
-          $yes = "yes";         
-   /* if($email_accept == $yes)
-    {
-       // wp_mail( $to, $subject, $body, $headers );
-       wp_mail( $to, $subject, $message );
-    }  
-    */
-     
-
+            $app_date=$_POST['mem_date'];            
     $wpdb->update(
         $nnhs_table_name,
         array(             
@@ -312,19 +284,30 @@ if(isset($_POST['upd']))
         array(
             's_no'=> $s_no
         )
-    );
-    
-    
-     
+    );   
+    //------------Email section          
+            $email_accept = $_POST['email_accept'];
+            $email_subject = $_POST['email_subject'];
+            $email_message = $_POST['email_message'];
+                $to = $email; 
+			    $subject = $email_subject;
+		        $email_body= $email_message . "<br><hr>Please do not reply to this email.";
+				
+				$message = $email_body;
+				$headers = array('Content-Type: text/html; charset=UTF-8', 'From: Company/Service <wordpress@companyname.com>');	
+          $yes = "yes";         
+  if($email_accept == $yes)
+    {
+        $path = preg_replace('/wp-content.*$/','',__DIR__);
+        require_once($path."wp-includes/pluggable.php");
+         require_once($path."wp-settings.php");
+       wp_mail( $to, $subject, $message, $headers );
+    }  
     $url=admin_url('admin.php?page=Members_Listing');
       
      ?>
-<meta http-equiv="refresh" content="1; url=https://nnhs.in/wp-admin/admin.php?page=Members_Listing" />
-
+<meta http-equiv="refresh" content="1; url=https://localhost/nnhs/wp-admin/admin.php?page=Members_Listing" />
 <?php
     exit;
-    
-     
 }
-
 ?>
